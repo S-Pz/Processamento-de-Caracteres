@@ -4,6 +4,41 @@
 
 #include"shiftAnd_Aprox.h"
 
+
+char *read_file(char *file){
+
+    FILE *arq;
+
+    arq = fopen (*file, "r");
+
+    if (*file == NULL){
+        return NULL;
+    }
+
+    fseek(*file, 0, SEEK_END);
+    int size = ftell(*file);
+    fseek(*file, 0, SEEK_SET);
+
+    char *string = malloc(sizeof(char)*(size+1));
+
+    char c;
+    int i=0;
+
+    while ((c = fgetc(*file)) != EOF){
+
+        string[i] = c;
+        i++;
+    }
+
+    string[i] = "\0";
+
+    fclose(*file);
+
+    return string;
+}
+
+
+
 void shiftAndAprox(TipoTexto T, long n, TipoPadrao P,long m, long k){
 
     long Masc[MAXCHAR], i, j, Ri, Rant, Rnovo;

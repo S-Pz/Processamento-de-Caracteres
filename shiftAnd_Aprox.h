@@ -10,5 +10,6 @@ typedef char TipoTexto[MAXTAMTEXTO];
 typedef char TipoPadrao[MAXTAMPADRAO];
 
 void shiftAndAprox(TipoTexto, long, TipoPadrao, long, long);
+char *read_file(char *);
 
 #endif
