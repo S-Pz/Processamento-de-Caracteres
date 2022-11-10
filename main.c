@@ -43,16 +43,18 @@ int main(int argc, char const *argv[]){
 }
 */
 
-int main(int agrc, char const *argv[]){
+// TO RUN  THIS PROGRAM TYPE IN TERMINAL : ./tp3 -i texto.txt padrao.txt
+int main(int agrc, char *argv[]){
 
     char *Text,*Def;
 
-    *Text = read_file(argv[2]);
+    Text = read_file(argv[2]);
+    Def = read_file(argv[3]);
+   
+    shiftAndAprox(Text, (long)strlen(Text), Def, (long)strlen(Def),1);
 
-    for(int i=0; i < strlen(Text); i++){
-
-        printf("%s",Text[i]);
-    }
+    free(Text);
+    free(Def);
 
     return 0;
 }

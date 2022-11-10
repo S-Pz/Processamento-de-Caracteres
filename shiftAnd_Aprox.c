@@ -4,51 +4,54 @@
 
 #include"shiftAnd_Aprox.h"
 
-
 char *read_file(char *file){
 
     FILE *arq;
 
-    arq = fopen (*file, "r");
+    arq = fopen (file, "r");
 
-    if (*file == NULL){
+    if (arq == NULL){
         return NULL;
     }
 
-    fseek(*file, 0, SEEK_END);
-    int size = ftell(*file);
-    fseek(*file, 0, SEEK_SET);
+    //Go to end of file and get size to alloc memory to string down below
+    fseek(arq, 0, SEEK_END);
+    int size = ftell(arq); // obtain size of file
+    fseek(arq, 0, SEEK_SET);
 
+    //Alloc string witch size founded in file 
     char *string = malloc(sizeof(char)*(size+1));
 
     char c;
     int i=0;
 
-    while ((c = fgetc(*file)) != EOF){
+    // Obtain the characters in file and put them in the string
+    while ((c = fgetc(arq)) != EOF){
 
         string[i] = c;
         i++;
     }
 
-    string[i] = "\0";
+    //Put the special character in final of string 
+    string[i] = '\0';
 
-    fclose(*file);
-
+    //Close file and return
+    fclose(arq);
     return string;
 }
 
+void shiftAndAprox(char *T, long n, char *P,long m, long k){
 
-
-void shiftAndAprox(TipoTexto T, long n, TipoPadrao P,long m, long k){
-
+    
     long Masc[MAXCHAR], i, j, Ri, Rant, Rnovo;
     long R[NUMMAXERROS + 1];
-
+    
     for(i=0; i<MAXCHAR; i++){
         Masc[i] = 0;
     }
     for(i=1; i<=m; i++){
         Masc[P[i-1] + 127] |= 1 << (m-i);
+        printf("%ld ", Masc[P[i-1] + 127]);
     }
 
     R[0] = 0;
