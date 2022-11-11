@@ -34,7 +34,8 @@ void shiftAndAprox(TipoTexto T, long n, TipoPadrao P,long m, long k){
             Rant = R[j];
             R[j] = Rnovo |Ri;
         }
-        if((Rnovo & 1) != 0){
+        
+        if((Rnovo & 1) !=0){
             printf("Casamento na posição %12ld\n" , i+1);
         }
     }
