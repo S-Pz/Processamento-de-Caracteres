@@ -46,13 +46,62 @@ int main(int argc, char const *argv[]){
 // TO RUN  THIS PROGRAM TYPE IN TERMINAL : ./tp3 -i texto.txt padrao.txt
 int main(int agrc, char *argv[]){
 
+    FILE *t;
+    char a[200];
+    char b[200];
+    int tam1 = 0;
+    int tam2 = 0;
+    int aux1;
+    int tam = 0;
     char *Text,*Def;
+    long o;
 
     Text = read_file(argv[2]);
     Def = read_file(argv[3]);
-   
-    shiftAndAprox(Text, (long)strlen(Text), Def, (long)strlen(Def),1);
 
+    t = fopen(argv[3],"r");
+
+    for(int i; i<=strlen(Def); i++){
+        
+        fscanf(t,"%c",&a[i]);
+
+        if(a[i] == '\n'){
+            
+            tam2 = i-1;
+            aux1 = tam1;
+            tam = (tam2 - tam1);
+
+            for(int j = 0 ; j <= tam; j++){
+               
+               b[j] = a[aux1];
+               aux1++;
+               //printf("%c", b[j]);
+            }
+            //shiftAndAprox(Text, (long)strlen(Text), b, tam,0);
+            o = PD(Text, b, 0);
+            printf("quantidade de casamentos: %ld \n", o);
+            //printf("\n");
+            tam1 = tam2 + 2;
+        }
+    }
+    tam2 = strlen(Def);
+    aux1 = tam1;
+    tam = (tam2 - tam1);
+
+    for(int j = 0 ; j <= tam; j++){
+        
+        b[j] = a[aux1];
+        aux1++;
+        //printf("%c", b[j]);
+    }
+
+    //shiftAndAprox(Text, (long)strlen(Text), b, tam,0);
+    o = PD(Text, b, 0);
+    printf("quantidade de casamentos: %ld \n", o);
+
+    //printf("\n");
+
+    fclose(t);
     free(Text);
     free(Def);
 

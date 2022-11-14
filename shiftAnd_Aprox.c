@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 
 #include"shiftAnd_Aprox.h"
 
@@ -39,8 +40,7 @@ char *read_file(char *file){
     return string;
 }
 
-void shiftAndAprox(char *T, long n, char *P,long m, long k){
-
+void shiftAndAprox(char *T, long n, char *P, long m, long k){
     
     long Masc[MAXCHAR], i, j, Ri, Rant, Rnovo;
     long R[NUMMAXERROS + 1];
@@ -48,11 +48,10 @@ void shiftAndAprox(char *T, long n, char *P,long m, long k){
     for(i=0; i<MAXCHAR; i++){
         Masc[i] = 0;
     }
-    for(i=1; i<=m; i++){
+    for(i = 0; i<=m; i++){
         Masc[P[i-1] + 127] |= 1 << (m-i);
-        printf("%ld ", Masc[P[i-1] + 127]);
-    }
 
+    }
     R[0] = 0;
     Ri = 1 << (m-1);
     
@@ -72,9 +71,64 @@ void shiftAndAprox(char *T, long n, char *P,long m, long k){
             R[j] = Rnovo |Ri;
         }
         if((Rnovo & 1) != 0){
-            printf("Casamento na posição %12ld\n" , i+1);
+            printf("%12ld" , i+1);
         }
     }
+}
+
+long PD(char *T, char *P, long k){
+
+    long i , pos, o;
+    long n, m;
+    long lact ,nC,pC;
+    long *C;
+
+    n = strlen(T); // tamanho do texto  
+    m = strlen(P); // tamanho da palavra
+    
+    C = (long*)malloc(sizeof(long)*(m+1));
+
+    for(i=0;i<=m; i++){
+        C[i] = i ;
+    }
+    o = 0;  // numero de ocorrencias
+    lact = k + 1; // erros
+
+    for(pos=1;pos<=n;pos++){   // procurando
+        pC = 0;
+        nC = 0;
+    
+        for(i=1;i<=lact; i++){
+            
+            if (P[ i-1] ==T[pos-1]){
+                nC = pC;
+            }else{
+                if (pC < nC){
+                    nC = pC;
+                } 
+                if (C[i] < nC){
+                    nC = C[i] ;
+                } 
+                nC++;
+            }
+            pC = C[ i ] ;
+            C[ i ] = nC;
+        }
+        
+        while(C[lact] > k){
+            lact--;
+        }
+        if (lact == m){
+            o++; 
+            printf("%ld \n" , pos - m);
+            
+        }else{
+            lact++;
+            
+        }
+    }
+    free (C);
+    return o;
 }
 
 
