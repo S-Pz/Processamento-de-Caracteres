@@ -131,5 +131,3 @@ long PD(char *T, char *P, long k){
     return o;
 }
 
-
-fdasfasdf
