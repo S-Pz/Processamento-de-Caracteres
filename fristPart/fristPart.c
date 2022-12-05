@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<string.h>
 
-#include"shiftAnd_Aprox.h"
+#include "fristPart.h"
 
 char *read_file(char *file){
 
@@ -41,7 +41,7 @@ char *read_file(char *file){
 }
 
 void shiftAndAprox(char *T, long n, char *P, long m, long k){
-    
+
     long Masc[MAXCHAR], i, j, Ri, Rant, Rnovo;
     long R[NUMMAXERROS + 1];
     
@@ -71,7 +71,7 @@ void shiftAndAprox(char *T, long n, char *P, long m, long k){
             R[j] = Rnovo |Ri;
         }
         if((Rnovo & 1) != 0){
-            printf("%12ld" , i+1);
+            printf(" %12ld" , i+1-m);
         }
     }
 }
@@ -94,7 +94,7 @@ long PD(char *T, char *P, long k){
     o = 0;  // numero de ocorrencias
     lact = k + 1; // erros
 
-    for(pos=1;pos<=n;pos++){   // procurando
+    for(pos=1; pos<=n; pos++){   // procurando
         pC = 0;
         nC = 0;
     
@@ -120,7 +120,7 @@ long PD(char *T, char *P, long k){
         }
         if (lact == m){
             o++; 
-            printf("%ld \n" , pos - m);
+            printf(" %ld" , pos - m);
             
         }else{
             lact++;

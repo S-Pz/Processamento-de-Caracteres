@@ -1,5 +1,5 @@
-#ifndef _SHIFT_AND_APROX
-#define _SHIFT_AND_APROX
+#ifndef _PARTE_UM
+#define _PARTE_UM
 
 #define MAXTAMTEXTO 1000
 #define MAXTAMPADRAO 10
